@@ -1,0 +1,36 @@
+{
+  "name": "hodder-web-app",
+  "version": "0.0.1",
+  "description": "",
+  "main": "none",
+  "scripts": {
+    "build": "mkdir -p dist && cp index.html dist/index.html && webpack ",
+    "build:watch": "npm run build -- --watch",
+    "mocha": "mocha --recursive --compilers coffee:coffee-script/register specs",
+    "mocha:watch": "npm run mocha -- --watch",
+    "test": "npm run mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bacon-dom": "^0.1.10",
+    "baconjs": "^0.7.80",
+    "dom-delegator": "^13.1.0",
+    "franz-kafka": "^0.7.5",
+    "kafka-node": "^0.3.1",
+    "lodash": "^4.0.0",
+    "virtual-dom": "^2.1.1"
+  },
+  "devDependencies": {
+    "chai": "^3.4.0",
+    "coffee-loader": "^0.7.2",
+    "coffee-script": "^1.10.0",
+    "css-loader": "^0.22.0",
+    "less": "^2.5.3",
+    "less-loader": "^2.2.1",
+    "mocha": "^2.3.3",
+    "moment": "^2.11.1",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.8"
+  }
+}

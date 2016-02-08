@@ -1,0 +1,11 @@
+.idea
+build
+buildEte
+dienes.iml
+node_modules
+dist
+npm-debug.log
+reports
+screenshots
+*.iml
+npm-debug.log.*
