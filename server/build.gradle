@@ -1,0 +1,13 @@
+plugins {
+  id 'java'
+  id 'idea'
+  id 'eclipse'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.sparkjava:spark-core:2.3'
+}
