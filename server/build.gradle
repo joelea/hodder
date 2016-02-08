@@ -1,8 +1,26 @@
-plugins {
-  id 'java'
-  id 'idea'
-  id 'eclipse'
+buildscript {
+    repositories { jcenter() }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.2'
+    }
 }
+
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '1.2.2'
+    id 'idea'
+    id 'eclipse'
+}
+
+mainClassName = "hodder.Application"
+
+shadowJar {
+    manifest {
+        attributes 'Main-Class': 'hodder.Application'
+    }
+}
+
 
 repositories {
     mavenCentral()
@@ -11,3 +29,4 @@ repositories {
 dependencies {
     compile 'com.sparkjava:spark-core:2.3'
 }
+
