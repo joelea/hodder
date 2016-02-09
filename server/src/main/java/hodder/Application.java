@@ -5,13 +5,15 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.postgresql.jdbc3.Jdbc3PoolingDataSource;
 import org.skife.jdbi.v2.DBI;
 
+import java.util.function.Supplier;
+
 import static spark.Spark.get;
 import static spark.Spark.post;
 
 public class Application {
     private static final String TOPIC = "example-topic";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Counts counts = createCounts();
         Events events = new Events(TOPIC);
         Kafka kafka = new Kafka();
@@ -32,9 +34,21 @@ public class Application {
         System.out.println("Hodder is flowing strong!");
     }
 
-    private static Counts createCounts() {
+    private static Counts createCounts() throws InterruptedException {
         DBI dbi = new DBI(createDataSource());
-        return dbi.open(Counts.class);
+        return withRetry( () -> dbi.open(Counts.class));
+    }
+
+    private static <T> T withRetry(Supplier<T> supplier) throws InterruptedException {
+        for(int i = 0; i < 60; i++) {
+            try {
+                return supplier.get();
+            } catch(Exception e) {
+                System.out.println("Failed to obtain connection to database. Retrying.");
+                Thread.sleep(1000);
+            }
+        }
+        throw new IllegalStateException("Failed to connect to the database after 60 attempts");
     }
 
     private static Jdbc3PoolingDataSource createDataSource() {
