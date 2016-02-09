@@ -24,13 +24,14 @@ public class Application {
 
         get("/count", (request, response) -> counts.get(1) );
         post("/increment", (request, response) -> events.write(new Increment()) );
+        
+        System.out.println("Hodder is flowing strong!");
 
         onConsume((message) -> {
             System.out.println("INCREMENT");
             counts.increment(1);
         });
 
-        System.out.println("Hodder is flowing strong!");
     }
 
     private static void onConsume(Consumer<String> eventConsumer) {
