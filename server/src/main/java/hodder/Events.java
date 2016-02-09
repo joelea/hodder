@@ -8,10 +8,11 @@ import java.util.Properties;
 
 public class Events {
 
-    private static final String TOPIC = "example-topic";
     private final Producer<String, String> producer;
+    private final String topic;
 
-    public Events() {
+    public Events(String topic) {
+        this.topic = topic;
         Properties props = new Properties();
         props.put("bootstrap.servers", "kafka:9092");
         props.put("acks", "all");
@@ -27,7 +28,7 @@ public class Events {
     }
 
     public boolean write(Increment increment) {
-        producer.send(new ProducerRecord<String, String>(TOPIC, "increment"));
+        producer.send(new ProducerRecord<String, String>(topic, "increment"));
         return true;
     }
 }
