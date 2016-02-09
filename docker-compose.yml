@@ -22,6 +22,8 @@ server:
   build: ./server
   links:
     - db
+  ports:
+    - 4567:4567
 
 app:
   image: smebberson/alpine-nginx
