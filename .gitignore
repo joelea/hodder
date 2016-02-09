@@ -1,8 +1,6 @@
 .idea
-hodder.iml
 *.ipr
 *.iws
+*.iml
 out
 server/build
-**/*.iml
-*.iml
