@@ -38,7 +38,3 @@ dependencies {
     compile 'io.reactivex:rxjava:1.1.0'
 }
 
-task dockerComposeBuild(type:Exec, dependsOn: 'shadowJar') {
-    commandLine 'docker-compose', 'build'
-}
-
