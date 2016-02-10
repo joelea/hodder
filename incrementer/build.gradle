@@ -16,7 +16,7 @@ plugins {
 
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
-mainClassName = "hodder.Application"
+mainClassName = "hodder.Incrementer"
 
 shadowJar {
     manifest {

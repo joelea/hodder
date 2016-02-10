@@ -26,6 +26,12 @@ server:
   ports:
     - 4567:4567
 
+incrementer:
+  build: ./incrementer
+  links:
+    - db
+    - kafka
+
 entry:
   build: ./nginx
   links:
