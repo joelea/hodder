@@ -16,8 +16,7 @@
     "bacon-dom": "^0.1.10",
     "baconjs": "^0.7.80",
     "dom-delegator": "^13.1.0",
-    "franz-kafka": "^0.7.5",
-    "kafka-node": "^0.3.1",
+    "jquery": "^2.2.0",
     "lodash": "^4.0.0",
     "virtual-dom": "^2.1.1"
   },

@@ -31,14 +31,12 @@ entry:
   links:
     - app
     - "server:api"
-  volumes:
-    - ./web-app/dist:/usr/html
   ports:
     - "443:443"
     - "80:80"
 
 app:
-  image: smebberson/alpine-nginx
+  build: ./web-app
   links:
     - server
   volumes:
