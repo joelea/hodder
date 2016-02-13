@@ -1,11 +1,20 @@
 package hodder;
 
+import hodder.db.DataSourceFactory;
+import org.skife.jdbi.v2.DBI;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.Transaction;
 
+import static hodder.db.Retrying.withRetry;
+
 public abstract class Counts {
+
+    public static Counts createDefault() throws InterruptedException {
+        DBI dbi = new DBI(DataSourceFactory.create());
+        return withRetry( () -> dbi.open(Counts.class));
+    }
 
     @SqlQuery("SELECT count FROM counts WHERE id = :id")
     public abstract int get(@Bind("id") int i);

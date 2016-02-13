@@ -1,46 +1,52 @@
-zookeeper:
-  image: wurstmeister/zookeeper
-  ports: 
-    - "2181:2181"
+version: '2'
 
-kafka:
-  image: wurstmeister/kafka
-  ports:
-    - "9092:9092"
-  links:
-    - zookeeper:zk
-  environment:
-    KAFKA_ADVERTISED_HOST_NAME: 192.168.99.101
-    KAFKA_CREATE_TOPICS: "example-topic:1:1"
-  volumes:
-    - /var/run/docker.sock:/var/run/docker.sock
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
 
-db:
-  image: postgres
+  kafka:
+    image: wurstmeister/kafka
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_CREATE_TOPICS: "example-topic:1:1"
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - zookeeper
 
-server:
-  build: ./server
-  links:
-    - db
-    - kafka
-  ports:
-    - 4567:4567
+  kafka-monitor:
+    build: kafka-monitor
+    ports:
+      - 8080
+    depends_on:
+      - zookeeper
 
-entry:
-  build: ./nginx
-  links:
-    - app
-    - "server:api"
-  ports:
-    - "443:443"
-    - "80:80"
+  db:
+    image: postgres
 
-app:
-  build: ./web-app
-  links:
-    - server
-  volumes:
-    - ./web-app/dist:/usr/html
-  ports:
-    - 443
-    - 80
+  server:
+    build: ./server
+    depends_on:
+      - db
+      - kafka
+
+  incrementer:
+    build: ./incrementer
+    depends_on:
+      - db
+      - kafka
+
+  entry:
+    build: ./nginx
+    ports:
+      - "443:443"
+      - "80:80"
+    links:
+      - server:api
+
+  app:
+    build: ./web-app
+    volumes:
+      - ./web-app/dist:/usr/html
