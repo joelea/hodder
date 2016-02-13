@@ -4,6 +4,8 @@ A dummy implementation of a reactive application with reads and writes completel
 
 #### Setup
 
+**NOTE: Requires docker-compose 1.6**
+
 To try it out (this currently sucks, but will get easier):
 
 1. edit `KAFKA_ADVERTISED_HOST_NAME` in the docker-compose.yml to be your docker machine IP
