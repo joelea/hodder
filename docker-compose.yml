@@ -13,15 +13,23 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - zookeeper
 
   db:
     image: postgres
 
   server:
     build: ./server
+    depends_on:
+      - db
+      - kafka
 
   incrementer:
     build: ./incrementer
+    depends_on:
+      - db
+      - kafka
 
   entry:
     build: ./nginx
