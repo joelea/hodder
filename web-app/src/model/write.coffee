@@ -1,3 +1,8 @@
 $ = require 'jquery'
 
-module.exports = (url, body) -> $.post(url)
+module.exports = (url, body) ->
+  $.ajax(
+    type: "POST"
+    url: url
+    data: body
+  )
