@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -x
+
 function compose {
     docker-compose --file docker-compose.yml --file ete-docker-compose.yml $*
 }
