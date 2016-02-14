@@ -1,5 +1,6 @@
 package kafka;
 
+import hodder.Message;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -28,13 +29,13 @@ public class Kafka {
         }
     }
 
-    public Observable<ConsumerRecord<String, String>> eventsIn(String topic) {
-        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(properties);
+    public Observable<ConsumerRecord<String, Message>> eventsIn(String topic) {
+        KafkaConsumer<String, Message> consumer = new KafkaConsumer<>(properties);
         consumer.subscribe(asList(topic));
         return Observable.create((subscriber) -> {
             executor.execute(() -> {
                 while(true) {
-                    ConsumerRecords<String, String> results = consumer.poll(100);
+                    ConsumerRecords<String, Message> results = consumer.poll(100);
                     StreamSupport.stream(results.spliterator(), false)
                         .forEachOrdered(subscriber::onNext);
                 }

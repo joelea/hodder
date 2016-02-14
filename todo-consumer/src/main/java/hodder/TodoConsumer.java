@@ -15,7 +15,8 @@ public class TodoConsumer {
         kafka.eventsIn(TOPIC)
                 .map(ConsumerRecord::value)
                 .subscribe( msg -> {
-                    todos.addTodo(msg);
+                    AddTodo addTodo = (AddTodo) msg;
+                    todos.addTodo(addTodo.todoContents());
                 });
 
         System.out.println("Hodder is flowing strong!");
