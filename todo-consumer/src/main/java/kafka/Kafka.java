@@ -23,6 +23,7 @@ public class Kafka {
         properties.put("group.id", "test");
         properties.put("enable.auto.commit", "false");
         properties.put("auto.commit.interval.ms", "1000");
+        properties.put("auto.offset.reset", "earliest");
         properties.put("session.timeout.ms", "30000");
         properties.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         properties.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");

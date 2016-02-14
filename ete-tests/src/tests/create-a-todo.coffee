@@ -7,4 +7,4 @@ module.exports =
       .waitForElementVisible('.ete-add-todo')
       .click('.ete-add-todo')
 
-    browser.expect.element('.ete-todo-list > .ete-todo-content').text.to.equal('a todo')
+    browser.expect.element('.ete-todo-list > .ete-todo-content').text.to.equal('a todo').before(10000)

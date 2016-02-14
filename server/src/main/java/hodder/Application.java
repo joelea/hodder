@@ -19,7 +19,9 @@ public class Application {
     }
 
     private static boolean addTodo(Events events, Request request) {
-        events.write(request.body());
+        String todo = request.body();
+        System.out.println(todo);
+        events.write(todo);
         return true;
     }
 

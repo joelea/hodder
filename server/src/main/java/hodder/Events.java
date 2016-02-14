@@ -24,7 +24,6 @@ public class Events {
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 
         producer = new KafkaProducer(props);
-        producer.send(new ProducerRecord<>("hodder.todos", Integer.toString(1), Integer.toString(1)));
     }
 
     public boolean write(String message) {

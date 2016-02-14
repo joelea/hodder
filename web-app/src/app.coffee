@@ -22,21 +22,21 @@ add = (todo) ->
 complete = (id) -> write('/api/complete/' + id)
 
 textField = (value, onChange) ->
-  h 'input',
+  h 'input.ete-set-todo',
     type: 'text'
     value: value
     'ev-input': onChange
 
 renderTodos = (todos) ->
-  h 'todos', todos.map (todo) ->
-    h 'p', todo
+  h '.todos.ete-todo-list', todos.map (todo) ->
+    h 'p.ete-todo-content', todo
 
 
 render = (model) ->
   h 'components',[
     renderTodos(model.todos)
     textField(model.newTodo, (event) -> updateNewTodo(event.target.value))
-    h 'button', { 'ev-click': -> add(model.newTodo) }, 'add'
+    h 'button.ete-add-todo', { 'ev-click': -> add(model.newTodo) }, 'add'
   ]
 
 html = model.map(render)
