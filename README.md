@@ -6,13 +6,9 @@ A dummy implementation of a reactive application with reads and writes completel
 
 **NOTE: Requires docker-compose 1.6**
 
-To try it out (this currently sucks, but will get easier):
+To try it out run ./scripts/quick-start.sh (read the script to find out what it does)
 
-1. run `npm build` in the web-app directory
-2. run `./gradlew shadowJar` in the root directory
-3. run `docker-compose up -d`
-4. run `open http://$(docker-machine ip $DOCKER_MACHINE_NAME)`
-5. Add some todos!
+You can run the ETE tests with ./scripts/ete-tests.sh and VNC into the selenium container for the tests using ./scripts/watch-ete-tests.sh
 
 
 #### Components
