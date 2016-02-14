@@ -30,8 +30,9 @@ textField = (value, onChange) ->
     'ev-input': onChange
 
 renderTodos = (todos) ->
-  h '.todos.ete-todo-list', todos.map (todo) ->
-    h 'p.ete-todo-content', todo
+  h '.todos.ete-todo-list', todos.map (todo, index) ->
+    h ".ete-todo-#{index}",
+      h 'p.ete-todo-content', todo
 
 
 render = (model) ->
