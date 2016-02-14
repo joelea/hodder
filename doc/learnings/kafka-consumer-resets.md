@@ -1,0 +1,1 @@
+Kafka consumers by default start consuming the latest message in the stream if they don't have a committed offset to restore from. This can be changed using `auto.offset.reset=earliest` and is likely particularly important for ETE tests as it allows you to avoid guaranteeing startup order of services.
