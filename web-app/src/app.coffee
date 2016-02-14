@@ -7,7 +7,9 @@ stream = require './model/stream'
 DomDelegator = require 'dom-delegator'
 domDelegator = new DomDelegator()
 
-todos = stream("/api/todos").map((todos) -> todos[1...-1].split(','))
+todos = stream("/api/todos")
+  .map((todos) -> todos[1...-1].split(','))
+  .toProperty([])
 newTodoUpdates = new Bacon.Bus()
 newTodo = newTodoUpdates.scan('', (current, update) -> update)
 
