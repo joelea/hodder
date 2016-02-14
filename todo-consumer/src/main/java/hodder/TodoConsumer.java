@@ -4,7 +4,7 @@ import kafka.Kafka;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
 public class TodoConsumer {
-    private static final String TOPIC = "example-topic";
+    private static final String TOPIC = "hodder.todos";
 
     public static void main(String[] args) throws InterruptedException {
         Kafka kafka = new Kafka();

@@ -17,7 +17,7 @@ To try it out (this currently sucks, but will get easier):
 #### Components
 
 * Clicking increment makes a post request to the server
-* The server pushes an event into kafka in the `example-topic`
+* The server pushes an event into kafka in the `hodder.todos`
 * the same server (though this is in no way necessary) consumes the event and makes a db write based on it
 
 Completely independently:

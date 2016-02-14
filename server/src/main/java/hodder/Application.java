@@ -6,7 +6,7 @@ import static spark.Spark.get;
 import static spark.Spark.post;
 
 public class Application {
-    private static final String TOPIC = "example-topic";
+    private static final String TOPIC = "hodder.todos";
 
     public static void main(String[] args) throws InterruptedException {
         Todos todos = Todos.createDefault();
