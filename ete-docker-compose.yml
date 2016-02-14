@@ -1,0 +1,14 @@
+version: '2'
+
+services:
+  selenium:
+    image: selenium/standalone-firefox-debug
+    ports:
+      - "4444:4444"
+      - "5900:5900"
+
+  ete:
+    build: ./ete-tests
+    volumes:
+      - ./screenshots:/screenshots
+    command: npm run nightwatch

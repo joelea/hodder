@@ -1,0 +1,43 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'run', 'nightwatch' ]
+2 info using npm@3.3.10
+3 info using node@v5.0.0
+4 verbose run-script [ 'prenightwatch', 'nightwatch', 'postnightwatch' ]
+5 info lifecycle dienes-ete@0.0.1~prenightwatch: dienes-ete@0.0.1
+6 silly lifecycle dienes-ete@0.0.1~prenightwatch: no script for prenightwatch, continuing
+7 info lifecycle dienes-ete@0.0.1~nightwatch: dienes-ete@0.0.1
+8 verbose lifecycle dienes-ete@0.0.1~nightwatch: unsafe-perm in lifecycle true
+9 verbose lifecycle dienes-ete@0.0.1~nightwatch: PATH: /usr/lib/node_modules/npm/bin/node-gyp-bin:/app/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+10 verbose lifecycle dienes-ete@0.0.1~nightwatch: CWD: /app
+11 silly lifecycle dienes-ete@0.0.1~nightwatch: Args: [ '-c', 'npm run build && nightwatch' ]
+12 silly lifecycle dienes-ete@0.0.1~nightwatch: Returned: code: 1  signal: null
+13 info lifecycle dienes-ete@0.0.1~nightwatch: Failed to exec nightwatch script
+14 verbose stack Error: dienes-ete@0.0.1 nightwatch: `npm run build && nightwatch`
+14 verbose stack Exit status 1
+14 verbose stack     at EventEmitter.<anonymous> (/usr/lib/node_modules/npm/lib/utils/lifecycle.js:232:16)
+14 verbose stack     at emitTwo (events.js:87:13)
+14 verbose stack     at EventEmitter.emit (events.js:172:7)
+14 verbose stack     at ChildProcess.<anonymous> (/usr/lib/node_modules/npm/lib/utils/spawn.js:24:14)
+14 verbose stack     at emitTwo (events.js:87:13)
+14 verbose stack     at ChildProcess.emit (events.js:172:7)
+14 verbose stack     at maybeClose (internal/child_process.js:818:16)
+14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
+15 verbose pkgid dienes-ete@0.0.1
+16 verbose cwd /app
+17 error Linux 4.0.9-boot2docker
+18 error argv "/usr/bin/node" "/usr/bin/npm" "run" "nightwatch"
+19 error node v5.0.0
+20 error npm  v3.3.10
+21 error code ELIFECYCLE
+22 error dienes-ete@0.0.1 nightwatch: `npm run build && nightwatch`
+22 error Exit status 1
+23 error Failed at the dienes-ete@0.0.1 nightwatch script 'npm run build && nightwatch'.
+23 error Make sure you have the latest version of node.js and npm installed.
+23 error If you do, this is most likely a problem with the dienes-ete package,
+23 error not with npm itself.
+23 error Tell the author that this fails on your system:
+23 error     npm run build && nightwatch
+23 error You can get their info via:
+23 error     npm owner ls dienes-ete
+23 error There is likely additional logging output above.
+24 verbose exit [ 1, true ]
