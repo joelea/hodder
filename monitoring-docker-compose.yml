@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+  kafka-monitor:
+    build: kafka-monitor
+    ports:
+      - 8080
+    depends_on:
+      - zookeeper
