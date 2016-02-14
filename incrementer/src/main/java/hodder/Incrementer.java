@@ -8,16 +8,14 @@ public class Incrementer {
 
     public static void main(String[] args) throws InterruptedException {
         Kafka kafka = new Kafka();
-        Counts counts = Counts.createDefault();
+        Todos todos = Todos.createDefault();
 
-        counts.createTable();
-        counts.addNewCounter();
+        todos.createTable();
 
         kafka.eventsIn(TOPIC)
                 .map(ConsumerRecord::value)
                 .subscribe( msg -> {
-                    counts.increment(1);
-                    System.out.println("R");
+                    todos.addTodo(msg);
                 });
 
         System.out.println("Hodder is flowing strong!");

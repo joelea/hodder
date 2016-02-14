@@ -27,8 +27,11 @@ public class Events {
         producer.send(new ProducerRecord<>("example-topic", Integer.toString(1), Integer.toString(1)));
     }
 
-    public boolean write(Increment increment) {
-        producer.send(new ProducerRecord<String, String>(topic, "increment"));
+    public boolean write(String message) {
+        ProducerRecord<String, String> record = new ProducerRecord<>(topic, message);
+
+        producer.send(record);
+
         return true;
     }
 }
