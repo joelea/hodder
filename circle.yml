@@ -15,7 +15,5 @@ dependencies:
     - docker-compose --file docker-compose.yml --file ete-docker-compose.yml build
 
 test:
-  pre:
-    - docker-comose --file 
   override:
     - ./scripts/ete-tests.sh
