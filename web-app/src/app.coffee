@@ -21,7 +21,7 @@ add = (todo) ->
   write('/api/add', todo)
   updateNewTodo('')
 
-complete = (id) -> write('/api/complete/' + id)
+deleteTodo = (id) -> write('/api/delete/' + id)
 
 textField = (value, onChange) ->
   h 'input.ete-set-todo',
@@ -31,8 +31,10 @@ textField = (value, onChange) ->
 
 renderTodos = (todos) ->
   h '.todos.ete-todo-list', todos.map (todo, index) ->
-    h ".ete-todo-#{index}",
-      h 'p.ete-todo-content', todo
+    h ".ete-todo-#{index}", [
+      h 'span.ete-todo-content', todo
+      h 'button.ete-delete', { 'ev-click': -> deleteTodo(index) }, 'X'
+    ]
 
 
 render = (model) ->
