@@ -16,11 +16,11 @@ plugins {
 
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
-mainClassName = "hodder.Incrementer"
+mainClassName = "hodder.TodoConsumer"
 
 shadowJar {
     manifest {
-        attributes 'Main-Class': 'hodder.Incrementer'
+        attributes 'Main-Class': 'hodder.TodoConsumer'
     }
 }
 

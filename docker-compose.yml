@@ -32,8 +32,8 @@ services:
       - db
       - kafka
 
-  incrementer:
-    build: ./incrementer
+  todo-consumer:
+    build: ./todo-consumer
     depends_on:
       - db
       - kafka

@@ -3,7 +3,7 @@ package hodder;
 import kafka.Kafka;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
-public class Incrementer {
+public class TodoConsumer {
     private static final String TOPIC = "example-topic";
 
     public static void main(String[] args) throws InterruptedException {
