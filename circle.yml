@@ -25,6 +25,6 @@ dependencies:
 
 test:
   override:
-    - docker-compose -d
+    - docker-compose up -d
     - docker-compose --file ete-docker-compose.yml up -d selenium
     - docker-compose --file docker-compose.yml --file ete-docker-compose.yml run ete
