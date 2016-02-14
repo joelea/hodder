@@ -7,6 +7,7 @@ function compose {
 compose kill && \
 compose rm -f && \
 ./gradlew shadowJar && \
+cd web-app && npm install && npm run build && cd .. && \
 compose build && \
 compose up -d && \
 compose logs ete
