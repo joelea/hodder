@@ -5,6 +5,7 @@ import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import rx.Observable;
 
+import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -14,19 +15,17 @@ import static java.util.Arrays.asList;
 
 public class Kafka {
 
-    private final Properties properties;
+    private final Properties properties = propertiesFromFile();
     private final Executor executor = Executors.newCachedThreadPool();
 
-    public Kafka() {
-        properties = new Properties();
-        properties.put("bootstrap.servers", "kafka:9092");
-        properties.put("group.id", "test");
-        properties.put("enable.auto.commit", "false");
-        properties.put("auto.commit.interval.ms", "1000");
-        properties.put("auto.offset.reset", "earliest");
-        properties.put("session.timeout.ms", "30000");
-        properties.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-        properties.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+    private static Properties propertiesFromFile() {
+        try {
+            Properties props = new Properties();
+            props.load(Kafka.class.getResourceAsStream("/todo-consumer.properties"));
+            return props;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public Observable<ConsumerRecord<String, String>> eventsIn(String topic) {
