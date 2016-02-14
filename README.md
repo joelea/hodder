@@ -12,7 +12,7 @@ To try it out (this currently sucks, but will get easier):
 2. run `npm build` in the web-app directory
 3. run `docker-compose up -d`
 4. run `open http://$(docker-machine ip $DOCKER_MACHINE_NAME)`
-5. Click `increment` to your heart's content!
+5. Add some todos!
 
 #### Components
 
@@ -22,6 +22,6 @@ To try it out (this currently sucks, but will get easier):
 
 Completely independently:
 
-* The frontend generates a stream of db state which it then renders as the counter. This should be replaced with websockets soon to avoid the crazy polling.
+* The frontend generates a stream of db state which it then renders as the list of todos. This should be replaced with websockets soon to avoid the crazy polling.
 
  
