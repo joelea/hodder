@@ -12,8 +12,19 @@ dependencies:
   pre:
     - sudo pip install docker-compose
     - ./gradlew shadowJar
+    - cd web-app && npm install && npm run build && cd ..
     - docker-compose --file docker-compose.yml --file ete-docker-compose.yml build
+
+  cache_directories:
+    - "~/docker"
+
+  override:
+    - if [[ -e ~/docker/selenium.tar ]]; then docker load -i ~/docker/selenium.tar; fi
+    - docker pull selenium/standalone-firefox-debug
+    - mkdir -p ~/docker; docker save selenium/standalone-firefox-debug > ~/docker/selenium.tar
 
 test:
   override:
-    - ./scripts/ete-tests.sh
+    - docker-compose up -d
+    - docker-compose --file ete-docker-compose.yml up -d selenium
+    - docker-compose --file docker-compose.yml --file ete-docker-compose.yml run ete
