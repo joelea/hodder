@@ -12,8 +12,11 @@ dependencies:
   pre:
     - sudo pip install docker-compose
     - ./gradlew shadowJar
+    - cd web-app && npm install && npm run build && cd ..
     - docker-compose --file docker-compose.yml --file ete-docker-compose.yml build
 
 test:
   override:
-    - ./scripts/ete-tests.sh
+    - docker-compose -d
+    - docker-compose --file ete-docker-compose.yml up -d selenium
+    - docker-compose --file docker-compose.yml --file ete-docker-compose.yml run ete
