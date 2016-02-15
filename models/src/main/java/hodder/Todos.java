@@ -5,11 +5,13 @@ import org.skife.jdbi.v2.DBI;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
+import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 
 import java.util.List;
 
 import static hodder.db.Retrying.withRetry;
 
+@RegisterMapper(TodoMapper.class)
 public abstract class Todos {
 
     public static Todos createDefault() {
@@ -21,8 +23,8 @@ public abstract class Todos {
         }
     }
 
-    @SqlQuery("SELECT todo FROM todos")
-    public abstract List<String> getAll();
+    @SqlQuery("SELECT * FROM todos")
+    public abstract List<Todo> getAll();
 
     @SqlUpdate("CREATE TABLE IF NOT EXISTS todos (id SERIAL PRIMARY KEY, todo text)")
     public abstract void createTable();

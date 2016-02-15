@@ -13,9 +13,6 @@ module.exports =
 
   'delete a todo' : (browser) ->
     browser
-      .click('.ete-todo-1 .ete-delete')
-
-    browser.expect.element('.ete-todo-0 .ete-todo-content').text
-      .to.not.be.present.before(5000)
-
+      .click('.ete-todo-0 .ete-delete')
+      .waitForElementNotPresent('.ete-todo-0 .ete-todo-content')
 

@@ -1,5 +1,6 @@
 package hodder;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import hodder.events.TodoAdded;
 import hodder.events.TodoDeleted;
 import spark.Request;
@@ -11,11 +12,16 @@ import static spark.Spark.post;
 public class Application {
     private static final String TOPIC = "hodder.todos";
 
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+
     public static void main(String[] args) throws InterruptedException {
         Todos todos = Todos.createDefault();
         Events events = new Events(TOPIC);
 
-        get("/todos", (request, response) -> todos.getAll());
+        get("/todos", "application/json",
+                (request, response) -> todos.getAll(),
+                OBJECT_MAPPER::writeValueAsString);
+
         post("/add", (request, response) -> addTodo(events, request));
         post("/delete/:id", (request, response) -> removeTodo(events, request.params(":id")));
 
