@@ -3,7 +3,7 @@ package hodder;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DelegatingEventHandler {
+public class DelegatingEventHandler implements EventHandler {
     Map<Class, EventHandler<Event>> handlers = new HashMap<>();
 
     public static DelegatingEventHandler create() {
@@ -24,6 +24,7 @@ public class DelegatingEventHandler {
         };
     }
 
+    @Override
     public void handle(Event event) {
         handlers.get(event.getClass()).handle(event);
     }
