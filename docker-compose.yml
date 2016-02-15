@@ -24,6 +24,8 @@ services:
     depends_on:
       - db
       - kafka
+    ports:
+      - "4567:4567"
 
   todo-consumer:
     build: ./todo-consumer
