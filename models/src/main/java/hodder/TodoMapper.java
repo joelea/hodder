@@ -11,7 +11,8 @@ public class TodoMapper implements ResultSetMapper<Todo> {
     public Todo map(int index, ResultSet r, StatementContext ctx) throws SQLException {
         return new Todo(
                 r.getLong("id"),
-                r.getString("todo")
+                r.getString("todo"),
+                r.getBoolean("complete")
         );
     }
 }

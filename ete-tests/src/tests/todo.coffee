@@ -8,7 +8,15 @@ module.exports =
       .click('.ete-add-todo')
 
     browser.expect.element('.ete-todo-0 .ete-todo-content').text
-      .to.equal('a todo')
+      .to.contain('a todo')
+      .before(5000)
+
+  'complete a todo' : (browser) ->
+    browser
+      .click('.ete-todo-0 .ete-complete')
+
+    browser.expect.element('.ete-todo-0 .ete-complete')
+      .to.be.visible
       .before(5000)
 
   'delete a todo' : (browser) ->
