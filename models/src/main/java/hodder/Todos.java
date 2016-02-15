@@ -30,4 +30,6 @@ public abstract class Todos {
     @SqlUpdate("INSERT INTO todos (todo) VALUES (:todo)")
     public abstract void addTodo(@Bind("todo") String todo);
 
+    @SqlUpdate("DELETE FROM todos WHERE id = :id")
+    public abstract void removeTodo(@Bind("id") long id);
 }

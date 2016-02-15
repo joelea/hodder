@@ -1,8 +1,10 @@
 package hodder;
 
 import hodder.events.TodoAdded;
+import hodder.events.TodoDeleted;
 import spark.Request;
 
+import static java.lang.Long.*;
 import static spark.Spark.get;
 import static spark.Spark.post;
 
@@ -15,13 +17,14 @@ public class Application {
 
         get("/todos", (request, response) -> todos.getAll());
         post("/add", (request, response) -> addTodo(events, request));
-        post("/remove/:id", (request, response) -> removeTodo(events, request.params(":id")));
+        post("/delete/:id", (request, response) -> removeTodo(events, request.params(":id")));
 
         System.out.println("Hodder is flowing strong!");
     }
 
     private static boolean removeTodo(Events events, String id) {
         System.out.println("remove " + id);
+        events.write(new TodoDeleted(parseLong(id)));
         return true;
     }
 

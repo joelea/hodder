@@ -1,6 +1,7 @@
 package hodder;
 
 import hodder.events.TodoAdded;
+import hodder.events.TodoDeleted;
 import kafka.Kafka;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
@@ -10,7 +11,12 @@ public class TodoConsumer {
     private static final String TOPIC = "hodder.todos";
     private static final Todos todos = createDefault();
     private static final EventHandler handler = DelegatingEventHandler.create()
-        .delegate(TodoAdded.class, TodoConsumer::handleTodoAdded);
+        .delegate(TodoAdded.class, TodoConsumer::handleTodoAdded)
+        .delegate(TodoDeleted.class, TodoConsumer::handleTodoRemoved);
+
+    private static void handleTodoRemoved(TodoDeleted todoDeleted) {
+        todos.removeTodo(todoDeleted.id());
+    }
 
     private static void handleTodoAdded(TodoAdded todoAdded) {
         todos.addTodo(todoAdded.todoContents());
