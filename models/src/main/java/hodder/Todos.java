@@ -26,7 +26,7 @@ public abstract class Todos {
     @SqlQuery("SELECT * FROM todos")
     public abstract List<Todo> getAll();
 
-    @SqlUpdate("CREATE TABLE IF NOT EXISTS todos (id SERIAL PRIMARY KEY, todo text)")
+    @SqlUpdate("CREATE TABLE IF NOT EXISTS todos (id SERIAL PRIMARY KEY, todo text, complete boolean DEFAULT false)")
     public abstract void createTable();
 
     @SqlUpdate("INSERT INTO todos (todo) VALUES (:todo)")
@@ -34,4 +34,7 @@ public abstract class Todos {
 
     @SqlUpdate("DELETE FROM todos WHERE id = :id")
     public abstract void removeTodo(@Bind("id") long id);
+
+    @SqlUpdate("UPDATE todos SET complete = true WHERE id = :id")
+    public abstract void complete(@Bind("id") long id);
 }

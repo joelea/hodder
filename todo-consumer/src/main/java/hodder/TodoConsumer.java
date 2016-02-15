@@ -12,7 +12,12 @@ public class TodoConsumer {
     private static final Todos todos = createDefault();
     private static final EventHandler handler = DelegatingEventHandler.create()
         .delegate(TodoAdded.class, TodoConsumer::handleTodoAdded)
-        .delegate(TodoDeleted.class, TodoConsumer::handleTodoRemoved);
+        .delegate(TodoDeleted.class, TodoConsumer::handleTodoRemoved)
+        .delegate(TodoCompleted.class, TodoConsumer::handleTodoCompleted);
+
+    private static void handleTodoCompleted(TodoCompleted todoCompleted) {
+        todos.complete(todoCompleted.id());
+    }
 
     private static void handleTodoRemoved(TodoDeleted todoDeleted) {
         todos.removeTodo(todoDeleted.id());

@@ -22,6 +22,7 @@ add = (todo) ->
   updateNewTodo('')
 
 deleteTodo = (id) -> write('/api/delete/' + id)
+complete = (id) -> write('/api/complete/' + id)
 
 textField = (value, onChange) ->
   h 'input.ete-set-todo',
@@ -29,11 +30,17 @@ textField = (value, onChange) ->
     value: value
     'ev-input': onChange
 
+status = (todo) -> if todo.complete then 'complete' else 'incomplete'
+
 renderTodos = (todos) ->
   h '.todos.ete-todo-list', todos.map (todo, index) ->
-    h ".ete-todo-#{index}", [
-      h 'span.ete-todo-content', todo.contents
+    h ".ete-todo-#{index}.ete-#{status(todo)}", [
+      h 'span.ete-todo-content', "#{todo.contents} (#{status(todo)})"
       h 'button.ete-delete', { 'ev-click': -> deleteTodo(todo.id) }, 'X'
+      if todo.complete
+        ''
+      else
+        h 'button.ete-complete', { 'ev-click': -> complete(todo.id) }, 'complete'
     ]
 
 

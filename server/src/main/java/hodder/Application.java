@@ -24,8 +24,14 @@ public class Application {
 
         post("/add", (request, response) -> addTodo(events, request));
         post("/delete/:id", (request, response) -> removeTodo(events, request.params(":id")));
+        post("/complete/:id", (request, response) -> complete(events, request.params(":id")));
 
         System.out.println("Hodder is flowing strong!");
+    }
+
+    private static boolean complete(Events events, String id) {
+        events.write(new TodoCompleted(parseLong(id)));
+        return true;
     }
 
     private static boolean removeTodo(Events events, String id) {
