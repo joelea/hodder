@@ -8,7 +8,7 @@ DomDelegator = require 'dom-delegator'
 domDelegator = new DomDelegator()
 
 todos = stream("/api/todos")
-  .map((todos) -> todos[1...-1].split(','))
+  .map(JSON.parse)
   .toProperty([])
 newTodoUpdates = new Bacon.Bus()
 newTodo = newTodoUpdates.scan('', (current, update) -> update)
@@ -21,7 +21,7 @@ add = (todo) ->
   write('/api/add', todo)
   updateNewTodo('')
 
-complete = (id) -> write('/api/complete/' + id)
+deleteTodo = (id) -> write('/api/delete/' + id)
 
 textField = (value, onChange) ->
   h 'input.ete-set-todo',
@@ -30,8 +30,11 @@ textField = (value, onChange) ->
     'ev-input': onChange
 
 renderTodos = (todos) ->
-  h '.todos.ete-todo-list', todos.map (todo) ->
-    h 'p.ete-todo-content', todo
+  h '.todos.ete-todo-list', todos.map (todo, index) ->
+    h ".ete-todo-#{index}", [
+      h 'span.ete-todo-content', todo.contents
+      h 'button.ete-delete', { 'ev-click': -> deleteTodo(todo.id) }, 'X'
+    ]
 
 
 render = (model) ->

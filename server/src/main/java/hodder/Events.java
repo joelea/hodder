@@ -9,7 +9,7 @@ import java.util.Properties;
 
 public class Events {
 
-    private final Producer<String, String> producer;
+    private final Producer<String, Event> producer;
     private final String topic;
 
     public Events(String topic) {
@@ -28,8 +28,8 @@ public class Events {
         }
     }
 
-    public boolean write(String message) {
-        ProducerRecord<String, String> record = new ProducerRecord<>(topic, message);
+    public boolean write(Event message) {
+        ProducerRecord<String, Event> record = new ProducerRecord<>(topic, message);
 
         producer.send(record);
 
