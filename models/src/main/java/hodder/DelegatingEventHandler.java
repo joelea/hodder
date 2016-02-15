@@ -3,14 +3,16 @@ package hodder;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EventDispatcher {
+public class DelegatingEventHandler {
     Map<Class, EventHandler<Event>> handlers = new HashMap<>();
 
-    public static EventDispatcher create() {
-        return new EventDispatcher();
+    public static DelegatingEventHandler create() {
+        return new DelegatingEventHandler();
     }
 
-    public <T extends Event> EventDispatcher dispatch(Class<T> type, EventHandler<T> handler) {
+    public <T extends Event> DelegatingEventHandler delegate(
+            Class<T> type,
+            EventHandler<T> handler) {
         handlers.put(type, castAndThen(type, handler));
         return this;
     }
