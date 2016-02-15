@@ -12,9 +12,13 @@ import static hodder.db.Retrying.withRetry;
 
 public abstract class Todos {
 
-    public static Todos createDefault() throws InterruptedException {
+    public static Todos createDefault() {
         DBI dbi = new DBI(DataSourceFactory.create());
-        return withRetry( () -> dbi.open(Todos.class));
+        try {
+            return withRetry( () -> dbi.open(Todos.class));
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @SqlQuery("SELECT todo FROM todos")

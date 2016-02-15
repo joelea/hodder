@@ -1,11 +1,12 @@
-package hodder;
+package hodder.events;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import hodder.Event;
 
-public class AddTodo implements Message {
+public class TodoAdded implements Event {
     private final String contents;
 
-    public AddTodo(@JsonProperty("contents") String contents) {
+    public TodoAdded(@JsonProperty("contents") String contents) {
         this.contents = contents;
     }
 

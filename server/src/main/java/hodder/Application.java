@@ -1,5 +1,6 @@
 package hodder;
 
+import hodder.events.TodoAdded;
 import spark.Request;
 
 import static spark.Spark.get;
@@ -25,7 +26,7 @@ public class Application {
     }
 
     private static boolean addTodo(Events events, Request request) {
-        Message message = new AddTodo(request.body());
+        Event message = new TodoAdded(request.body());
         System.out.println(message);
         events.write(message);
         return true;
