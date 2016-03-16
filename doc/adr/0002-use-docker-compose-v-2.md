@@ -18,3 +18,5 @@ We will use a docker-compose.yml (v.2) as the primary entry point of the project
 
 ## Consequences
 
+* Nginx caches its DNS lookups, docker-compose dynamically routes when new containers spin up that should now have that hostname. This can play very, very sadly.
+
